@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_remote/ui/controls/buttons.dart';
 import 'package:flutter_remote/ui/controls/navigation.dart';
+import 'package:flutter_remote/ui/controls/vertical_buttons.dart';
 import 'package:flutter_remote/ui/theme.dart';
 
 void main() {
@@ -27,24 +28,41 @@ class RemoteControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-        child: Center(
-          child: SizedBox(
-            width: 250,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ShadowedIconButton(
-                      icon: const Icon(Icons.info_outline),
-                      onPress: () {},
-                    ),
-                    ShadowedIconButton(
-                      icon: const Icon(FeatherIcons.home),
-                      onPress: () {},
-                    ),
+          child: Center(
+            child: SizedBox(
+              width: 250,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Transform.translate(
+                        offset: const Offset(0, 20),
+                        child: ShadowedIconButton(
+                          icon: const Icon(Icons.info_outline),
+                          onPress: () {},
+                        ),
+                      ),
+                      ShadowedIconButton(
+                        icon: const Icon(FeatherIcons.home),
+                        onPress: () {},
+                      ),
+                      Transform.translate(
+                        offset: const Offset(0, 20),
+                        child: TurnOnOffButton(
+                          onPress: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  const NavigationControl(),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -161,7 +179,11 @@ class RemoteControl extends StatelessWidget {
                         color: Colors.blue.shade400,
                         onPress: () {},
                       ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                ],
+              ),
             ),
           ),
         ),
