@@ -122,7 +122,7 @@ class ShadowedButton extends StatelessWidget {
   Widget build(BuildContext context) {
       shadowOpacity: shadowOpacity,
       child: BaseButton(
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor ?? Colors.white,
         child: child,
         onPress: onPress,
       ),
