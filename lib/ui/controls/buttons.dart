@@ -1,4 +1,35 @@
 
+class ShadowedIconButton extends StatelessWidget {
+  final Widget icon;
+  final VoidCallback onPress;
+  final Color? backgroundColor;
+
+  const ShadowedIconButton({
+    Key? key,
+    required this.icon,
+    required this.onPress,
+    this.backgroundColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ShadowedButton(
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: IconTheme(
+          data: IconTheme.of(context).copyWith(
+            color: Colors.grey,
+            size: 32,
+          ),
+          child: icon,
+        ),
+      ),
+      onPress: onPress,
+      backgroundColor: backgroundColor,
+    );
+  }
+}
+
 class ShadowedButton extends StatelessWidget {
   final Widget child;
   final VoidCallback onPress;
