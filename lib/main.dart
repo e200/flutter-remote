@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remote/ui/controls/navigation.dart';
+import 'package:flutter_remote/ui/theme.dart';
 
 void main() {
   runApp(const RemoteControlApp());
@@ -29,6 +31,7 @@ class RemoteControl extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
+                NavigationControl(),
               ],
             ),
           ),
