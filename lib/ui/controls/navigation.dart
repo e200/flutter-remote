@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remote/ui/controls/shared.dart';
 
 import 'buttons.dart';
 
@@ -59,19 +60,10 @@ class NavigationControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
+    return CircularShadow(
+      child: ClipOval(
+        child: ColoredBox(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(1000),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.075),
-              blurRadius: 15,
-            ),
-          ],
-        ),
-        child: ClipOval(
           child: GridView(
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsetsDirectional.zero,
