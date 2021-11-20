@@ -54,6 +54,46 @@ class RemoteControl extends StatelessWidget {
                   icon: const Icon(FeatherIcons.volumeX),
                   onPress: () {},
                 ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ShadowedIconButton(
+                        padding: const EdgeInsets.all(10),
+                        icon: const Icon(
+                          FeatherIcons.chevronsLeft,
+                          size: 24,
+                        ),
+                        onPress: () {},
+                      ),
+                      ShadowedIconButton(
+                        padding: const EdgeInsets.all(10),
+                        icon: Transform.translate(
+                          offset: const Offset(2, 0),
+                          child: const Icon(
+                            FeatherIcons.play,
+                            size: 24,
+                          ),
+                        ),
+                        onPress: () {},
+                      ),
+                      ShadowedIconButton(
+                        padding: const EdgeInsets.all(10),
+                        icon: const Icon(
+                          FeatherIcons.square,
+                          size: 24,
+                        ),
+                        onPress: () {},
+                      ),
+                      ShadowedIconButton(
+                        padding: const EdgeInsets.all(10),
+                        icon: const Icon(
+                          FeatherIcons.chevronsRight,
+                          size: 24,
+                        ),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
