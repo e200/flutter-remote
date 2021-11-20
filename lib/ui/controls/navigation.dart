@@ -33,19 +33,22 @@ class _OkButton extends StatelessWidget {
 
 class _ArrowButton extends StatelessWidget {
   final IconData icon;
+  final VoidCallback onPress;
 
   const _ArrowButton({
     Key? key,
     required this.icon,
+    required this.onPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return BaseButton(
+      onPress: onPress,
       child: Icon(
         icon,
         size: 64,
-        color: const Color(0xFF3F6DF2),
+        color: Colors.grey,
       ),
     );
   }
