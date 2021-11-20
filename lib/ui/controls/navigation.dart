@@ -63,9 +63,7 @@ class NavigationControl extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(1000),
-          ),
+          borderRadius: BorderRadius.circular(1000),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.075),
@@ -73,32 +71,40 @@ class NavigationControl extends StatelessWidget {
             ),
           ],
         ),
-        child: GridView(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsetsDirectional.zero,
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+        child: ClipOval(
+          child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsetsDirectional.zero,
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            children: [
+              const SizedBox.shrink(),
+              _ArrowButton(
+                icon: Icons.arrow_drop_up_rounded,
+                onPress: () {},
+              ),
+              const SizedBox.shrink(),
+              _ArrowButton(
+                icon: Icons.arrow_left_rounded,
+                onPress: () {},
+              ),
+              _OkButton(
+                onPress: () {},
+              ),
+              _ArrowButton(
+                icon: Icons.arrow_right_rounded,
+                onPress: () {},
+              ),
+              const SizedBox.shrink(),
+              _ArrowButton(
+                icon: Icons.arrow_drop_down_rounded,
+                onPress: () {},
+              ),
+              const SizedBox.shrink(),
+            ],
           ),
-          children: const [
-            SizedBox.shrink(),
-            _ArrowButton(
-              icon: Icons.arrow_drop_up_rounded,
-            ),
-            SizedBox.shrink(),
-            _ArrowButton(
-              icon: Icons.arrow_left_rounded,
-            ),
-            _OkButton(),
-            _ArrowButton(
-              icon: Icons.arrow_right_rounded,
-            ),
-            SizedBox.shrink(),
-            _ArrowButton(
-              icon: Icons.arrow_drop_down_rounded,
-            ),
-            SizedBox.shrink(),
-          ],
         ),
       ),
     );
