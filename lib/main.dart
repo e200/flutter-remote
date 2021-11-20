@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_remote/ui/controls/buttons.dart';
 import 'package:flutter_remote/ui/controls/navigation.dart';
 import 'package:flutter_remote/ui/theme.dart';
 
@@ -30,8 +32,52 @@ class RemoteControl extends StatelessWidget {
             width: 250,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                NavigationControl(),
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ShadowedIconButton(
+                      icon: const Icon(Icons.info_outline),
+                      onPress: () {},
+                    ),
+                    ShadowedIconButton(
+                      icon: const Icon(FeatherIcons.home),
+                      onPress: () {},
+                    ),
+                    TurnOnOffButton(
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 35),
+                ShadowedIconButton(
+                  icon: const Icon(FeatherIcons.volumeX),
+                  onPress: () {},
+                ),
+                const SizedBox(height: 35),
+                const NavigationControl(),
+                const SizedBox(height: 35),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ColoredButton(
+                      color: Colors.red.shade400,
+                      onPress: () {},
+                    ),
+                    ColoredButton(
+                      color: Colors.green.shade400,
+                      onPress: () {},
+                    ),
+                    ColoredButton(
+                      color: Colors.yellow.shade400,
+                      onPress: () {},
+                    ),
+                    ColoredButton(
+                      color: Colors.blue.shade400,
+                      onPress: () {},
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
