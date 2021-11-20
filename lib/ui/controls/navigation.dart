@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 
+import 'buttons.dart';
+
 class _OkButton extends StatelessWidget {
-  const _OkButton({Key? key}) : super(key: key);
+  final VoidCallback onPress;
+
+  const _OkButton({
+    Key? key,
+    required this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: const Center(
+    return BaseButton(
+      backgroundColor: Colors.grey.shade200,
+      onPress: onPress,
+      child: const Center(
+        child: Center(
           child: Text(
             'OK',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
           ),
         ),
       ),
