@@ -54,30 +54,26 @@ class RemoteControl extends StatelessWidget {
                   icon: const Icon(FeatherIcons.volumeX),
                   onPress: () {},
                 ),
-                const SizedBox(height: 35),
-                const NavigationControl(),
-                const SizedBox(height: 35),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ColoredButton(
-                      color: Colors.red.shade400,
-                      onPress: () {},
-                    ),
-                    ColoredButton(
-                      color: Colors.green.shade400,
-                      onPress: () {},
-                    ),
-                    ColoredButton(
-                      color: Colors.yellow.shade400,
-                      onPress: () {},
-                    ),
-                    ColoredButton(
-                      color: Colors.blue.shade400,
-                      onPress: () {},
-                    ),
-                  ],
-                ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ColoredButton(
+                        color: Colors.red.shade400,
+                        onPress: () {},
+                      ),
+                      ColoredButton(
+                        color: Colors.green.shade400,
+                        onPress: () {},
+                      ),
+                      ColoredButton(
+                        color: Colors.yellow.shade400,
+                        onPress: () {},
+                      ),
+                      ColoredButton(
+                        color: Colors.blue.shade400,
+                        onPress: () {},
+                      ),
               ],
             ),
           ),
