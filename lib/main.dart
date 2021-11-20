@@ -27,6 +27,7 @@ class RemoteControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+          physics: const BouncingScrollPhysics(),
         child: Center(
           child: SizedBox(
             width: 250,
