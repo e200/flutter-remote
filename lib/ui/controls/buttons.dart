@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_remote/ui/controls/shared.dart';
 
 class TurnOnOffButton extends StatelessWidget {
   final VoidCallback onPress;
@@ -120,6 +121,7 @@ class ShadowedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return CircularShadow(
       shadowOpacity: shadowOpacity,
       child: BaseButton(
         backgroundColor: backgroundColor ?? Colors.white,
