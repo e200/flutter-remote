@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:flutter_remote/services/remote_signal_emitter.dart';
+import 'package:flutter_remote/services/remote_signal_emmiter.dart';
 import 'package:flutter_remote/ui/controls/buttons.dart';
-import 'package:flutter_remote/ui/controls/navigation.dart';
-import 'package:flutter_remote/ui/controls/vertical_buttons.dart';
 import 'package:flutter_remote/ui/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -68,177 +66,223 @@ class RemoteControl extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(0, 20),
-                          child: ShadowedIconButton(
-                            icon: const Icon(Icons.info_outline),
-                            onPress: ref.read(remoteSignalEmitter).info,
-                          ),
-                        ),
-                        ShadowedIconButton(
-                          icon: const Icon(FeatherIcons.home),
-                          onPress: ref.read(remoteSignalEmitter).home,
-                        ),
-                        Transform.translate(
-                          offset: const Offset(0, 20),
-                          child: TurnOnOffButton(
-                            onPress: ref.read(remoteSignalEmitter).turnOnOff,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    NavigationControl(
-                      onPressNavigateLeft:
-                          ref.read(remoteSignalEmitter).navigateLeft,
-                      onPressNavigateDown:
-                          ref.read(remoteSignalEmitter).navigateDown,
-                      onPressNavigateRight:
-                          ref.read(remoteSignalEmitter).navigateRight,
-                      onPressNavigateUp:
-                          ref.read(remoteSignalEmitter).navigateUp,
-                      onPressOk: ref.read(remoteSignalEmitter).ok,
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ShadowedIconButton(
-                          icon: const Icon(Icons.exit_to_app),
-                          onPress: ref.read(remoteSignalEmitter).exit,
-                        ),
-                        ShadowedIconButton(
-                          icon: const Icon(Icons.arrow_back),
-                          onPress: ref.read(remoteSignalEmitter).back,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        VerticalButtons(
-                          children: [
-                            ShadowedIconButton(
-                              shadowOpacity: 0,
-                              icon: const Icon(FeatherIcons.volume2),
-                              onPress: ref.read(remoteSignalEmitter).volumeUp,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Transform.translate(
+                            offset: const Offset(0, 20),
+                            child: ShadowedIconButton(
+                              icon: const Icon(Icons.info_outline),
+                              onPress: ref.read(remoteSignalEmmiter).info,
                             ),
-                            const SizedBox(height: 10),
-                            Text(
-                              'vol',
-                              style: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
+                          ),
+                          ShadowedIconButton(
+                            icon: const Icon(FeatherIcons.home),
+                            onPress: ref.read(remoteSignalEmmiter).home,
+                          ),
+                          Transform.translate(
+                            offset: const Offset(0, 20),
+                            child: TurnOnOffButton(
+                              onPress: ref.read(remoteSignalEmmiter).turnOnOff,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 15),
+                      CircularShadow(
+                        child: ClipOval(
+                          child: ColoredBox(
+                            color: Theme.of(context).cardColor,
+                            child: GridView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsetsDirectional.zero,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
                               ),
+                              children: [
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_drop_up_rounded,
+                                  onPress:
+                                      ref.read(remoteSignalEmmiter).navigateUp,
+                                ),
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_left_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateLeft,
+                                ),
+                                OkButton(
+                                  onPress: ref.read(remoteSignalEmmiter).ok,
+                                ),
+                                ArrowButton(
+                                  icon: Icons.arrow_right_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateRight,
+                                ),
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_drop_down_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateDown,
+                                ),
+                                const SizedBox.shrink(),
+                              ],
                             ),
-                            const SizedBox(height: 10),
-                            ShadowedIconButton(
-                              shadowOpacity: 0,
-                              icon: const Icon(FeatherIcons.volume1),
-                              onPress: ref.read(remoteSignalEmitter).volumeDown,
-                            ),
-                          ],
-                        ),
-                        ShadowedIconButton(
-                          icon: const Icon(FeatherIcons.volumeX),
-                          onPress: ref.read(remoteSignalEmitter).mute,
-                        ),
-                        VerticalButtons(
-                          children: [
-                            ShadowedIconButton(
-                              shadowOpacity: 0,
-                              icon: const Icon(FeatherIcons.chevronUp),
-                              onPress:
-                                  ref.read(remoteSignalEmitter).nextChannel,
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              'ch',
-                              style: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            ShadowedIconButton(
-                              shadowOpacity: 0,
-                              icon: const Icon(FeatherIcons.chevronDown),
-                              onPress:
-                                  ref.read(remoteSignalEmitter).previousChannel,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ShadowedIconButton(
-                          padding: const EdgeInsets.all(10),
-                          icon: const Icon(
-                            FeatherIcons.chevronsLeft,
-                            size: 24,
                           ),
-                          onPress: ref.read(remoteSignalEmitter).backwards,
                         ),
-                        ShadowedIconButton(
-                          padding: const EdgeInsets.all(10),
-                          icon: Transform.translate(
-                            offset: const Offset(2, 0),
-                            child: const Icon(
-                              FeatherIcons.play,
+                      ),
+                      const SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Transform.translate(
+                            offset: const Offset(0, -20),
+                            child: ShadowedIconButton(
+                              icon: const Icon(Icons.exit_to_app),
+                              onPress: ref.read(remoteSignalEmmiter).exit,
+                            ),
+                          ),
+                          ShadowedIconButton(
+                            icon: const Icon(FeatherIcons.volumeX),
+                            onPress: ref.read(remoteSignalEmmiter).mute,
+                          ),
+                          Transform.translate(
+                            offset: const Offset(0, -20),
+                            child: ShadowedIconButton(
+                              icon: const Icon(Icons.arrow_back),
+                              onPress: ref.read(remoteSignalEmmiter).back,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          VerticalButtons(
+                            children: [
+                              ShadowedIconButton(
+                                shadowOpacity: 0,
+                                icon: const Icon(FeatherIcons.volume2),
+                                onPress: ref.read(remoteSignalEmmiter).volumeUp,
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                'vol',
+                                style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              ShadowedIconButton(
+                                shadowOpacity: 0,
+                                icon: const Icon(FeatherIcons.volume1),
+                                onPress:
+                                    ref.read(remoteSignalEmmiter).volumeDown,
+                              ),
+                            ],
+                          ),
+                          VerticalButtons(
+                            children: [
+                              ShadowedIconButton(
+                                shadowOpacity: 0,
+                                icon: const Icon(FeatherIcons.chevronUp),
+                                onPress:
+                                    ref.read(remoteSignalEmmiter).nextChannel,
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                'ch',
+                                style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              ShadowedIconButton(
+                                shadowOpacity: 0,
+                                icon: const Icon(FeatherIcons.chevronDown),
+                                onPress: ref
+                                    .read(remoteSignalEmmiter)
+                                    .previousChannel,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShadowedIconButton(
+                            padding: const EdgeInsets.all(10),
+                            icon: const Icon(
+                              FeatherIcons.chevronsLeft,
                               size: 24,
                             ),
+                            onPress: ref.read(remoteSignalEmmiter).backwards,
                           ),
-                          onPress: ref.read(remoteSignalEmitter).play,
-                        ),
-                        ShadowedIconButton(
-                          padding: const EdgeInsets.all(10),
-                          icon: const Icon(
-                            FeatherIcons.pause,
-                            size: 24,
+                          ShadowedIconButton(
+                            padding: const EdgeInsets.all(10),
+                            icon: Transform.translate(
+                              offset: const Offset(2, 0),
+                              child: const Icon(
+                                FeatherIcons.play,
+                                size: 24,
+                              ),
+                            ),
+                            onPress: ref.read(remoteSignalEmmiter).play,
                           ),
-                          onPress: () {},
-                        ),
-                        ShadowedIconButton(
-                          padding: const EdgeInsets.all(10),
-                          icon: const Icon(
-                            FeatherIcons.chevronsRight,
-                            size: 24,
+                          ShadowedIconButton(
+                            padding: const EdgeInsets.all(10),
+                            icon: const Icon(
+                              FeatherIcons.pause,
+                              size: 24,
+                            ),
+                            onPress: () {},
                           ),
-                          onPress: ref.read(remoteSignalEmitter).pause,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ColoredButton(
-                          color: Colors.red.shade400,
-                          onPress: ref.read(remoteSignalEmitter).forward,
-                        ),
-                        ColoredButton(
-                          color: Colors.green.shade400,
-                          onPress: () {},
-                        ),
-                        ColoredButton(
-                          color: Colors.yellow.shade400,
-                          onPress: () {},
-                        ),
-                        ColoredButton(
-                          color: Colors.blue.shade400,
-                          onPress: () {},
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                  ],
-                );
+                          ShadowedIconButton(
+                            padding: const EdgeInsets.all(10),
+                            icon: const Icon(
+                              FeatherIcons.chevronsRight,
+                              size: 24,
+                            ),
+                            onPress: ref.read(remoteSignalEmmiter).pause,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ColoredButton(
+                            color: Colors.red.shade400,
+                            onPress: ref.read(remoteSignalEmmiter).red,
+                          ),
+                          ColoredButton(
+                            color: Colors.green.shade400,
+                            onPress: ref.read(remoteSignalEmmiter).green,
+                          ),
+                          ColoredButton(
+                            color: Colors.yellow.shade400,
+                            onPress: ref.read(remoteSignalEmmiter).yellow,
+                          ),
+                          ColoredButton(
+                            color: Colors.blue.shade400,
+                            onPress: ref.read(remoteSignalEmmiter).blue,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                    ],
+                  );
                 },
               ),
             ),
