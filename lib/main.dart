@@ -41,6 +41,13 @@ class RemoteControl extends StatelessWidget {
           child: Center(
             child: SizedBox(
               width: 250,
+              child: Consumer(
+                builder: (context, ref, _) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -232,7 +239,8 @@ class RemoteControl extends StatelessWidget {
                     const SizedBox(height: 30),
                   ],
                 );
-              }),
+                },
+              ),
             ),
           ),
         ),
