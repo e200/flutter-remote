@@ -17,9 +17,13 @@ class RemoteControlApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
-        theme: getTheme(context),
-        home: const RemoteControl(),
+      child: Consumer(
+        builder: (context, ref, _) {
+          return MaterialApp(
+            theme: getTheme(context, ref.watch(appThemeProvider)),
+            home: const RemoteControl(),
+          );
+        },
       ),
     );
   }
@@ -37,13 +41,26 @@ class RemoteControl extends StatelessWidget {
           child: Center(
             child: SizedBox(
               width: 250,
-              child: Consumer(builder: (context, ref, _) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 30),
-                    Row(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            FeatherIcons.sun,
+                            color: Colors.grey,
+                          ),
+                          Switch(
+                            value: ref.watch(appThemeProvider) == AppTheme.dark,
+                            onChanged: (value) {
+                              ref.read(appThemeProvider.notifier).toggleTheme();
+                            },
+                          ),
+                          const Icon(
+                            FeatherIcons.moon,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 15),
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Transform.translate(
