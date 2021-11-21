@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter_remote/remote_codes/lg.dart';
+import 'package:flutter_remote/lg_signal_codes.dart';
 import 'package:ir_sensor_plugin/ir_sensor_plugin.dart';
 import 'package:isolate_handler/isolate_handler.dart';
 import 'package:riverpod/riverpod.dart';
@@ -24,9 +24,9 @@ void _emmit(String json) async {
   _isolates.kill(_map['isolate']!);
 }
 
-final remoteSignalEmmiter = Provider<RemoteSignalEmmiter>((ref) => LgRemoteSignalEmmiter());
+final signalEmmiter = Provider<SignalEmmiter>((ref) => LgRemoteSignalEmmiter());
 
-abstract class RemoteSignalEmmiter {
+abstract class SignalEmmiter {
   void turnOnOff();
   void home();
   void info();
@@ -52,120 +52,120 @@ abstract class RemoteSignalEmmiter {
   void blue();
 }
 
-class LgRemoteSignalEmmiter implements RemoteSignalEmmiter {
+class LgRemoteSignalEmmiter implements SignalEmmiter {
   @override
   void backwards() {
-    emmit(LgRemoteCode.fastBackward);
+    emmit(LgSignalCodes.fastBackward);
   }
 
   @override
   void forward() {
-    emmit(LgRemoteCode.fastForward);
+    emmit(LgSignalCodes.fastForward);
   }
 
   @override
   void home() {
-    emmit(LgRemoteCode.home);
+    emmit(LgSignalCodes.home);
   }
 
   @override
   void info() {
-    emmit(LgRemoteCode.info);
+    emmit(LgSignalCodes.info);
   }
 
   @override
   void mute() {
-    emmit(LgRemoteCode.mute);
+    emmit(LgSignalCodes.mute);
   }
 
   @override
   void navigateDown() {
-    emmit(LgRemoteCode.navigateDown);
+    emmit(LgSignalCodes.navigateDown);
   }
 
   @override
   void navigateLeft() {
-    emmit(LgRemoteCode.navigateLeft);
+    emmit(LgSignalCodes.navigateLeft);
   }
 
   @override
   void navigateRight() {
-    emmit(LgRemoteCode.navigateRight);
+    emmit(LgSignalCodes.navigateRight);
   }
 
   @override
   void navigateUp() {
-    emmit(LgRemoteCode.navigateUp);
+    emmit(LgSignalCodes.navigateUp);
   }
 
   @override
   void nextChannel() {
-    emmit(LgRemoteCode.channelUp);
+    emmit(LgSignalCodes.channelUp);
   }
 
   @override
   void ok() {
-    emmit(LgRemoteCode.ok);
+    emmit(LgSignalCodes.ok);
   }
 
   @override
   void play() {
-    emmit(LgRemoteCode.play);
+    emmit(LgSignalCodes.play);
   }
 
   @override
   void previousChannel() {
-    emmit(LgRemoteCode.channelDown);
+    emmit(LgSignalCodes.channelDown);
   }
 
   @override
   void pause() {
-    emmit(LgRemoteCode.pause);
+    emmit(LgSignalCodes.pause);
   }
 
   @override
   void turnOnOff() {
-    emmit(LgRemoteCode.turnOnOff);
+    emmit(LgSignalCodes.turnOnOff);
   }
 
   @override
   void volumeDown() {
-    emmit(LgRemoteCode.volumeDown);
+    emmit(LgSignalCodes.volumeDown);
   }
 
   @override
   void volumeUp() {
-    emmit(LgRemoteCode.volumeUp);
+    emmit(LgSignalCodes.volumeUp);
   }
 
   @override
   void back() {
-    emmit(LgRemoteCode.back);
+    emmit(LgSignalCodes.back);
   }
 
   @override
   void exit() {
-    emmit(LgRemoteCode.exit);
+    emmit(LgSignalCodes.exit);
   }
 
   @override
   void blue() {
-    emmit(LgRemoteCode.blue);
+    emmit(LgSignalCodes.blue);
   }
 
   @override
   void green() {
-    emmit(LgRemoteCode.green);
+    emmit(LgSignalCodes.green);
   }
 
   @override
   void red() {
-    emmit(LgRemoteCode.red);
+    emmit(LgSignalCodes.red);
   }
 
   @override
   void yellow() {
-    emmit(LgRemoteCode.yellow);
+    emmit(LgSignalCodes.yellow);
   }
 
   void emmit(String pattern) {
