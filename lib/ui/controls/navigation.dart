@@ -56,7 +56,20 @@ class _ArrowButton extends StatelessWidget {
 }
 
 class NavigationControl extends StatelessWidget {
-  const NavigationControl({Key? key}) : super(key: key);
+  final VoidCallback onPressNavigateLeft;
+  final VoidCallback onPressNavigateUp;
+  final VoidCallback onPressNavigateRight;
+  final VoidCallback onPressNavigateDown;
+  final VoidCallback onPressOk;
+
+  const NavigationControl({
+    Key? key,
+    required this.onPressNavigateDown,
+    required this.onPressNavigateLeft,
+    required this.onPressNavigateRight,
+    required this.onPressNavigateUp,
+    required this.onPressOk,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,24 +88,24 @@ class NavigationControl extends StatelessWidget {
               const SizedBox.shrink(),
               _ArrowButton(
                 icon: Icons.arrow_drop_up_rounded,
-                onPress: () {},
+                onPress: onPressNavigateUp,
               ),
               const SizedBox.shrink(),
               _ArrowButton(
                 icon: Icons.arrow_left_rounded,
-                onPress: () {},
+                onPress: onPressNavigateLeft,
               ),
               _OkButton(
-                onPress: () {},
+                onPress: onPressOk,
               ),
               _ArrowButton(
                 icon: Icons.arrow_right_rounded,
-                onPress: () {},
+                onPress: onPressNavigateRight,
               ),
               const SizedBox.shrink(),
               _ArrowButton(
                 icon: Icons.arrow_drop_down_rounded,
-                onPress: () {},
+                onPress: onPressNavigateDown,
               ),
               const SizedBox.shrink(),
             ],

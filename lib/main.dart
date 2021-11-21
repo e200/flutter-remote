@@ -61,16 +61,17 @@ class RemoteControl extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 30),
-                  const NavigationControl(),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      VerticalButtons(
-                        children: [
-                          ShadowedIconButton(
-                            shadowOpacity: 0,
-                            icon: const Icon(FeatherIcons.volume2),
+                    NavigationControl(
+                      onPressNavigateLeft:
+                          ref.read(remoteSignalEmitter).navigateLeft,
+                      onPressNavigateDown:
+                          ref.read(remoteSignalEmitter).navigateDown,
+                      onPressNavigateRight:
+                          ref.read(remoteSignalEmitter).navigateRight,
+                      onPressNavigateUp:
+                          ref.read(remoteSignalEmitter).navigateUp,
+                      onPressOk: ref.read(remoteSignalEmitter).ok,
+                    ),
                             onPress: () {},
                           ),
                           const SizedBox(height: 10),
