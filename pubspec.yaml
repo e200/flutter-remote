@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   ir_sensor_plugin: ^0.2.0 
   flutter_feather_icons: ^2.0.0+1
+  riverpod: ^1.0.0
+  flutter_riverpod: ^1.0.0
 
 dev_dependencies:
   flutter_test:
