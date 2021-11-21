@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_remote/services/remote_signal_emitter.dart';
 import 'package:flutter_remote/ui/controls/buttons.dart';
 import 'package:flutter_remote/ui/controls/navigation.dart';
 import 'package:flutter_remote/ui/controls/vertical_buttons.dart';
 import 'package:flutter_remote/ui/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(const RemoteControlApp());
@@ -14,9 +16,11 @@ class RemoteControlApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: getTheme(context),
-      home: const RemoteControl(),
+    return ProviderScope(
+      child: MaterialApp(
+        theme: getTheme(context),
+        home: const RemoteControl(),
+      ),
     );
   }
 }
@@ -33,34 +37,35 @@ class RemoteControl extends StatelessWidget {
           child: Center(
             child: SizedBox(
               width: 250,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Transform.translate(
-                        offset: const Offset(0, 20),
-                        child: ShadowedIconButton(
-                          icon: const Icon(Icons.info_outline),
-                          onPress: () {},
+              child: Consumer(builder: (context, ref, _) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Transform.translate(
+                          offset: const Offset(0, 20),
+                          child: ShadowedIconButton(
+                            icon: const Icon(Icons.info_outline),
+                            onPress: ref.read(remoteSignalEmitter).info,
+                          ),
                         ),
-                      ),
-                      ShadowedIconButton(
-                        icon: const Icon(FeatherIcons.home),
-                        onPress: () {},
-                      ),
-                      Transform.translate(
-                        offset: const Offset(0, 20),
-                        child: TurnOnOffButton(
-                          onPress: () {},
+                        ShadowedIconButton(
+                          icon: const Icon(FeatherIcons.home),
+                          onPress: ref.read(remoteSignalEmitter).home,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
+                        Transform.translate(
+                          offset: const Offset(0, 20),
+                          child: TurnOnOffButton(
+                            onPress: ref.read(remoteSignalEmitter).turnOnOff,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
                     NavigationControl(
                       onPressNavigateLeft:
                           ref.read(remoteSignalEmitter).navigateLeft,
@@ -72,119 +77,145 @@ class RemoteControl extends StatelessWidget {
                           ref.read(remoteSignalEmitter).navigateUp,
                       onPressOk: ref.read(remoteSignalEmitter).ok,
                     ),
-                            onPress: () {},
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'vol',
-                            style: TextStyle(
-                              color: Colors.grey.shade400,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          ShadowedIconButton(
-                            shadowOpacity: 0,
-                            icon: const Icon(FeatherIcons.volume1),
-                            onPress: () {},
-                          ),
-                        ],
-                      ),
-                      ShadowedIconButton(
-                        icon: const Icon(FeatherIcons.volumeX),
-                        onPress: () {},
-                      ),
-                      VerticalButtons(
-                        children: [
-                          ShadowedIconButton(
-                            shadowOpacity: 0,
-                            icon: const Icon(FeatherIcons.chevronUp),
-                            onPress: () {},
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'ch',
-                            style: TextStyle(
-                              color: Colors.grey.shade400,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          ShadowedIconButton(
-                            shadowOpacity: 0,
-                            icon: const Icon(FeatherIcons.chevronDown),
-                            onPress: () {},
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ShadowedIconButton(
-                        padding: const EdgeInsets.all(10),
-                        icon: const Icon(
-                          FeatherIcons.chevronsLeft,
-                          size: 24,
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ShadowedIconButton(
+                          icon: const Icon(Icons.exit_to_app),
+                          onPress: ref.read(remoteSignalEmitter).exit,
                         ),
-                        onPress: () {},
-                      ),
-                      ShadowedIconButton(
-                        padding: const EdgeInsets.all(10),
-                        icon: Transform.translate(
-                          offset: const Offset(2, 0),
-                          child: const Icon(
-                            FeatherIcons.play,
+                        ShadowedIconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPress: ref.read(remoteSignalEmitter).back,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        VerticalButtons(
+                          children: [
+                            ShadowedIconButton(
+                              shadowOpacity: 0,
+                              icon: const Icon(FeatherIcons.volume2),
+                              onPress: ref.read(remoteSignalEmitter).volumeUp,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'vol',
+                              style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ShadowedIconButton(
+                              shadowOpacity: 0,
+                              icon: const Icon(FeatherIcons.volume1),
+                              onPress: ref.read(remoteSignalEmitter).volumeDown,
+                            ),
+                          ],
+                        ),
+                        ShadowedIconButton(
+                          icon: const Icon(FeatherIcons.volumeX),
+                          onPress: ref.read(remoteSignalEmitter).mute,
+                        ),
+                        VerticalButtons(
+                          children: [
+                            ShadowedIconButton(
+                              shadowOpacity: 0,
+                              icon: const Icon(FeatherIcons.chevronUp),
+                              onPress:
+                                  ref.read(remoteSignalEmitter).nextChannel,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'ch',
+                              style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ShadowedIconButton(
+                              shadowOpacity: 0,
+                              icon: const Icon(FeatherIcons.chevronDown),
+                              onPress:
+                                  ref.read(remoteSignalEmitter).previousChannel,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ShadowedIconButton(
+                          padding: const EdgeInsets.all(10),
+                          icon: const Icon(
+                            FeatherIcons.chevronsLeft,
                             size: 24,
                           ),
+                          onPress: ref.read(remoteSignalEmitter).backwards,
                         ),
-                        onPress: () {},
-                      ),
-                      ShadowedIconButton(
-                        padding: const EdgeInsets.all(10),
-                        icon: const Icon(
-                          FeatherIcons.square,
-                          size: 24,
+                        ShadowedIconButton(
+                          padding: const EdgeInsets.all(10),
+                          icon: Transform.translate(
+                            offset: const Offset(2, 0),
+                            child: const Icon(
+                              FeatherIcons.play,
+                              size: 24,
+                            ),
+                          ),
+                          onPress: ref.read(remoteSignalEmitter).play,
                         ),
-                        onPress: () {},
-                      ),
-                      ShadowedIconButton(
-                        padding: const EdgeInsets.all(10),
-                        icon: const Icon(
-                          FeatherIcons.chevronsRight,
-                          size: 24,
+                        ShadowedIconButton(
+                          padding: const EdgeInsets.all(10),
+                          icon: const Icon(
+                            FeatherIcons.pause,
+                            size: 24,
+                          ),
+                          onPress: () {},
                         ),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ColoredButton(
-                        color: Colors.red.shade400,
-                        onPress: () {},
-                      ),
-                      ColoredButton(
-                        color: Colors.green.shade400,
-                        onPress: () {},
-                      ),
-                      ColoredButton(
-                        color: Colors.yellow.shade400,
-                        onPress: () {},
-                      ),
-                      ColoredButton(
-                        color: Colors.blue.shade400,
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
+                        ShadowedIconButton(
+                          padding: const EdgeInsets.all(10),
+                          icon: const Icon(
+                            FeatherIcons.chevronsRight,
+                            size: 24,
+                          ),
+                          onPress: ref.read(remoteSignalEmitter).pause,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ColoredButton(
+                          color: Colors.red.shade400,
+                          onPress: ref.read(remoteSignalEmitter).forward,
+                        ),
+                        ColoredButton(
+                          color: Colors.green.shade400,
+                          onPress: () {},
+                        ),
+                        ColoredButton(
+                          color: Colors.yellow.shade400,
+                          onPress: () {},
+                        ),
+                        ColoredButton(
+                          color: Colors.blue.shade400,
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                );
+              }),
             ),
           ),
         ),
