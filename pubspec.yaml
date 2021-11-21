@@ -38,6 +38,7 @@ dependencies:
   flutter_feather_icons: ^2.0.0+1
   riverpod: ^1.0.0
   flutter_riverpod: ^1.0.0
+  isolate_handler: ^1.0.0
 
 dev_dependencies:
   flutter_test:

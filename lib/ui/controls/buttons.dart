@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
-
 class OkButton extends StatelessWidget {
   final VoidCallback onPress;
 
@@ -233,7 +232,6 @@ class VerticalButtons extends StatelessWidget {
   }
 }
 
-
 class CircularShadow extends StatelessWidget {
   final Widget child;
   final double? blur;
@@ -253,7 +251,8 @@ class CircularShadow extends StatelessWidget {
         borderRadius: BorderRadius.circular(1000),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor.withOpacity(shadowOpacity ?? .1),
+            color:
+                Theme.of(context).shadowColor.withOpacity(shadowOpacity ?? .1),
             blurRadius: blur ?? 5,
           ),
         ],
