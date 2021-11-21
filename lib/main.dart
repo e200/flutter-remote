@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_remote/services/remote_signal_emmiter.dart';
 import 'package:flutter_remote/ui/controls/buttons.dart';
-import 'package:flutter_remote/ui/controls/navigation.dart';
-import 'package:flutter_remote/ui/controls/vertical_buttons.dart';
 import 'package:flutter_remote/ui/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -91,16 +89,53 @@ class RemoteControl extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      NavigationControl(
-                        onPressNavigateLeft:
-                            ref.read(remoteSignalEmmiter).navigateLeft,
-                        onPressNavigateDown:
-                            ref.read(remoteSignalEmmiter).navigateDown,
-                        onPressNavigateRight:
-                            ref.read(remoteSignalEmmiter).navigateRight,
-                        onPressNavigateUp:
-                            ref.read(remoteSignalEmmiter).navigateUp,
-                        onPressOk: ref.read(remoteSignalEmmiter).ok,
+                      CircularShadow(
+                        child: ClipOval(
+                          child: ColoredBox(
+                            color: Theme.of(context).cardColor,
+                            child: GridView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsetsDirectional.zero,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                              ),
+                              children: [
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_drop_up_rounded,
+                                  onPress:
+                                      ref.read(remoteSignalEmmiter).navigateUp,
+                                ),
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_left_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateLeft,
+                                ),
+                                OkButton(
+                                  onPress: ref.read(remoteSignalEmmiter).ok,
+                                ),
+                                ArrowButton(
+                                  icon: Icons.arrow_right_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateRight,
+                                ),
+                                const SizedBox.shrink(),
+                                ArrowButton(
+                                  icon: Icons.arrow_drop_down_rounded,
+                                  onPress: ref
+                                      .read(remoteSignalEmmiter)
+                                      .navigateDown,
+                                ),
+                                const SizedBox.shrink(),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 15),
                       Row(
