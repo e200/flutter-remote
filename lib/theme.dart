@@ -29,8 +29,8 @@ ThemeData getTheme(BuildContext context, AppTheme appTheme) {
       shadowColor: ThemeData.dark().shadowColor,
       primarySwatch: Colors.deepOrange,
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.all(Colors.deepOrange),
-        trackColor: MaterialStateProperty.all(Colors.deepOrange),
+        thumbColor: MaterialStateProperty.all(Colors.grey),
+        trackColor: MaterialStateProperty.all(Colors.grey),
       ),
       colorScheme: const ColorScheme.dark(
         primary: Colors.deepOrange,
