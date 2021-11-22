@@ -4,8 +4,7 @@ import 'package:riverpod/riverpod.dart';
 
 enum AppTheme { dark, light }
 
-final appThemeProvider =
-    StateNotifierProvider<_AppThemeState, AppTheme>((ref) => _AppThemeState());
+final appThemeProvider = StateNotifierProvider<_AppThemeState, AppTheme>((ref) => _AppThemeState());
 
 class _AppThemeState extends StateNotifier<AppTheme> {
   _AppThemeState() : super(AppTheme.light);
